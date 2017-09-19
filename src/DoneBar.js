@@ -39,12 +39,13 @@ class DoneBar extends React.Component {
       if (this.props.keyboardType !== 'numeric') {
         return null;
       }
+      const { offset } = this.props
       let { height, width } = endCoordinates;
       this.props.includeLayoutAnimation ? LayoutAnimation.configureNext(config) : null;
       // this.props.fade ? this.changeOpacity(1) : null;
       this.setState({
         width,
-        bottom: height - 40
+        bottom: height - 40 + offset
       });
     });
     this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', ({ endCoordinates }) => {
@@ -106,6 +107,7 @@ DoneBar.propTypes = {
   includeLayoutAnimation: React.PropTypes.bool,
   text: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  offset: React.PropTypes.number
 };
 
 DoneBar.defaultProps = {
@@ -114,6 +116,7 @@ DoneBar.defaultProps = {
   includeLayoutAnimation: true,
   text: 'Done',
   onPress: () => {},
+  offset: 0
 };
 
 const styles = StyleSheet.create({
